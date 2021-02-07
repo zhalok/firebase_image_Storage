@@ -9,9 +9,10 @@
     tools:context="com.example.fireabase_storage_demo.Uploading">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:id="@+id/myimage"
+        android:src="@drawable/ic_baseline_attach_file_24"
 
 
         />
@@ -22,6 +23,7 @@
         android:text="Choose Image"
         android:id="@+id/choose_button"
         style="@style/Widget.AppCompat.Toolbar"
+        android:layout_marginTop="20dp"
 
         />
 
@@ -43,5 +45,16 @@
         android:id="@+id/display_button"
         style="@style/Widget.AppCompat.Toolbar"
         />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loading"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        />
+
+
 
 </LinearLayout>
