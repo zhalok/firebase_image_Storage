@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:orientation="vertical"
+    tools:context="com.example.fireabase_storage_demo.Uploading">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/myimage"
+
+
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Choose Image"
+        android:id="@+id/choose_button"
+        style="@style/Widget.AppCompat.Toolbar"
+
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/upload_button"
+        android:textAllCaps="false"
+        android:text="Upload"
+        style="@style/Widget.AppCompat.Toolbar"
+
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Display Images"
+        android:textAllCaps="false"
+        android:id="@+id/display_button"
+        style="@style/Widget.AppCompat.Toolbar"
+        />
+
+</LinearLayout>

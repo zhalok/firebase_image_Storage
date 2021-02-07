@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "743685484164",
+    "project_id": "fireabasestoragedemo",
+    "storage_bucket": "fireabasestoragedemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743685484164:android:3d5d6a7249c536959d9cd1",
+        "android_client_info": {
+          "package_name": "com.example.fireabase_storage_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743685484164-u07n9rrgrar8i696rnupp0vdkqaq05l1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fireabase_storage_demo",
+            "certificate_hash": "54004dbb7414bee9d61cff76724fc85052d8ac04"
+          }
+        },
+        {
+          "client_id": "743685484164-fne376n6escnoupcsc6pl13alr348205.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBANIqsYTM8kvu_XWZN8lw-4hJOaaDGQHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743685484164-fne376n6escnoupcsc6pl13alr348205.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
