@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,6 +38,7 @@ public class Uploading extends AppCompatActivity implements View.OnClickListener
     private Handler handler;
     private Uri imageUri;
     StorageTask storageTask;
+    boolean flag=false;
     private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class Uploading extends AppCompatActivity implements View.OnClickListener
         imageView=(ImageView)findViewById(R.id.myimage);
         choose_button=(Button)findViewById(R.id.choose_button);
         upload_button=(Button)findViewById(R.id.upload_button);
-        display_button=(Button)findViewById(R.id.upload_button);
+        display_button=(Button)findViewById(R.id.display_button);
         progressBar=(ProgressBar)findViewById(R.id.loading);
         handler=new Handler();
         storageReference= FirebaseStorage.getInstance().getReference("Pic Information");
@@ -68,10 +70,22 @@ public class Uploading extends AppCompatActivity implements View.OnClickListener
 
                 break;
             case R.id.upload_button:
-                runProgressbar();
-                progressBar.setVisibility(View.VISIBLE);
-                saveData();
+                if(flag==false)
+                {
+                    Toast.makeText(getApplicationContext(),"Please upload an image first",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    runProgressbar();
+                    progressBar.setVisibility(View.VISIBLE);
+                    saveData();
 
+                }
+
+                break;
+
+            case R.id.display_button:
+                Intent intent = new Intent(Uploading.this,Show_images.class);
+                startActivity(intent);
                 break;
 
         }
@@ -82,6 +96,7 @@ public class Uploading extends AppCompatActivity implements View.OnClickListener
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, IMAGE_REQUEST);
+        flag=true;
 
 
     }
@@ -104,7 +119,14 @@ public class Uploading extends AppCompatActivity implements View.OnClickListener
                         progressBar.setVisibility(View.INVISIBLE);
                         imageView.setImageResource(R.drawable.ic_baseline_attach_file_24);
                         Toast.makeText(getApplicationContext(),"Image Stored Successfully",Toast.LENGTH_SHORT).show();
-                        String info=taskSnapshot.getUploadSessionUri().toString();
+
+
+                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                        while(!uriTask.isSuccessful());
+                         Uri  uri=uriTask.getResult();
+
+                        String info =uri.toString();
+
                         String key=databaseReference.push().getKey();
                         databaseReference.child(key).setValue(info);
 
@@ -123,7 +145,7 @@ public class Uploading extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
-            Picasso.get().load(imageUri).into(imageView);
+            Picasso.with(this).load(imageUri).into(imageView);
 
         }
     }
