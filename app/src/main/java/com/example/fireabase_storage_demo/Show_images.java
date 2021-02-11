@@ -3,6 +3,7 @@ package com.example.fireabase_storage_demo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SplittableRandom;
 
 public class Show_images extends AppCompatActivity {
 
@@ -29,6 +31,7 @@ public class Show_images extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_images);
         recyclerView=(RecyclerView)findViewById(R.id.recycle_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         arrayList= new ArrayList<String>();
         databaseReference= FirebaseDatabase.getInstance().getReference("Information");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -37,7 +40,22 @@ public class Show_images extends AppCompatActivity {
                 arrayList.clear();
                 for(DataSnapshot dataSnapshot:snapshot.getChildren())
                 {
-                    String uri=dataSnapshot.getValue(String.class);
+                    String temp_uri=dataSnapshot.getValue(String.class);
+                    String uri= new String();
+                    int end_position=0;
+                    for(int i=0;i<temp_uri.length();i++)
+                    {
+                      if(temp_uri.charAt(i)=='?')
+                      {
+                          end_position=i;
+                          break;
+                      }
+
+                    }
+
+                    uri=temp_uri.substring(0,end_position);
+
+
                     arrayList.add(uri);
                 }
                 if(arrayList.size()==0) {
@@ -47,6 +65,8 @@ public class Show_images extends AppCompatActivity {
                 }
                 Toast.makeText(getApplicationContext(),"Here are ur images",Toast.LENGTH_LONG).show();
 
+
+                ShowAlertDialogue();
 
                 Adapter adapter = new Adapter(Show_images.this,arrayList);
 
@@ -61,7 +81,24 @@ public class Show_images extends AppCompatActivity {
         });
     }
 
-  
+    void ShowAlertDialogue()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i=0;i<arrayList.size();i++)
+            stringBuilder.append(arrayList.get(i)+"\n");
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Image URLs");
+        builder.setMessage(stringBuilder.toString());
+        builder.create();
+        builder.show();
+
+
+    }
+
+
+
 
 
 
