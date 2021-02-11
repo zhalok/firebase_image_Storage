@@ -47,9 +47,10 @@ public class Show_images extends AppCompatActivity {
                 }
                 Toast.makeText(getApplicationContext(),"Here are ur images",Toast.LENGTH_LONG).show();
 
-                StringBuilder stringBuilder = new StringBuilder();
 
-               // recyclerView.setAdapter(adapter);
+                Adapter adapter = new Adapter(Show_images.this,arrayList);
+
+                recyclerView.setAdapter(adapter);
 
             }
 
@@ -59,6 +60,8 @@ public class Show_images extends AppCompatActivity {
             }
         });
     }
+
+  
 
 
 
